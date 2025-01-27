@@ -23,50 +23,56 @@ Create a lightweight Python library for basic graph processing. The library shou
    - Allow the user to specify the starting node for traversals.
 
 3. **Basic Algorithms**:
-   - Shortest Path:
+   - **Shortest Path**:
      - Implement Dijkstra’s algorithm for weighted graphs.
-   - Connected Components:
+   - **Connected Components**:
      - Identify all connected components in an undirected graph.
 
 4. **Utility Functions**:
    - Get all neighbors of a node.
    - Check if the graph is cyclic.
+     - Detect both directed and undirected graph cycles.
    - Get the degree of a node (in-degree and out-degree for directed graphs).
 
 ---
 
-### **2. Additional Features (Optional, for Bonus)**
-- **Graph Visualization**:
-  - Provide a method to visualize the graph using libraries like `matplotlib` or `networkx`.
+## **How to Use**
 
-- **Weighted Graph Support**:
-  - Extend the library to handle weighted edges.
-
-- **Performance Optimization**:
-  - Optimize the graph representation for large graphs (e.g., sparse graphs).
-
----
-
-## **Usage Example**
-Here’s an example of how the library should be used:
+### **1. Create a Graph**
+You can create a graph by specifying whether it's directed or not:
 
 ```python
-from my_graph_lib import Graph
+from src.graph import Graph
 
-# Create a graph
+# Create a directed graph
 g = Graph(directed=True)
+
+# Create an undirected graph
+g = Graph(directed=False)
+
+# Adding nodes
 g.add_node("A")
 g.add_node("B")
+
+# Adding an edge with a weight
 g.add_edge("A", "B", weight=5)
 
-# Traversals
+
+# Perform DFS from node A
 print("DFS:", g.dfs("A"))
+
+# Perform BFS from node A
 print("BFS:", g.bfs("A"))
 
-# Algorithms
-print("Shortest Path from A to B:", g.dijkstra("A", "B"))
+# Run Dijkstra’s algorithm to find the shortest path from A to B
+print("Shortest Path from A to B:", g.djikstra("A", "B"))
+
+# Check if the graph is cyclic
 print("Is Cyclic:", g.is_cyclic())
 
-# Graph Info
+# Get the neighbors of node A
 print("Neighbors of A:", g.get_neighbors("A"))
+
+# Get the degree of node A
 print("Degree of A:", g.get_degree("A"))
+

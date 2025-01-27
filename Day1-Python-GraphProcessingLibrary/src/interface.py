@@ -1,48 +1,59 @@
 from abc import ABC, abstractmethod
-from typing import List
-import numpy as np 
+from typing import List, Dict, Tuple
+import numpy as np
 
-class GraphInterface(ABC) :
-    
+class GraphInterface(ABC):
     @abstractmethod
-    def from_adjancy_matrix(self, m: np.ndarray[np.dtype[np.float], np.dtype[np.float]], vertices_names: List[str], override: bool): 
-        """
-            Create the graph from the adjancy matrix
-            @param m : N*N matrix where N is the total number of nodes
-            @param vertices_names: A list of vertices name, default to None
-            @param override: Whether to override the graph if it has already some nodes
-            @raise Exception : Can't override if the param is set to False and graph is already populated
-            @raise Exception : The matrix must be squared
-        """
-        ...
+    def from_adjancy_matrix(self, m: np.ndarray, vertices_names: List[str] = [], override: bool = True):
+        """Create graph from adjacency matrix"""
+        pass
 
     @abstractmethod
-    def get_adjancy_matrix(self): ...
+    def get_adjancy_matrix(self) -> np.ndarray:
+        """Get the adjacency matrix of the graph"""
+        pass
 
     @abstractmethod
-    def add_node(self, node): ...
+    def add_node(self, node: str):
+        """Add a new node to the graph"""
+        pass
 
     @abstractmethod
-    def add_edge(self, node_a, node_b, weight: float): ...
+    def add_edge(self, node_a: str, node_b: str, weight: float):
+        """Add an edge between two nodes"""
+        pass
 
     @abstractmethod
-    def dfs(self, root): ...
+    def dfs(self, root: str) -> List[str]:
+        """Perform DFS traversal from a given root node"""
+        pass
 
     @abstractmethod
-    def bfs(self, root): ...
+    def bfs(self, root: str) -> List[str]:
+        """Perform BFS traversal from a given root node"""
+        pass
 
     @abstractmethod
-    def djikstra(self, node_a, node_b): ...
+    def djikstra(self, node_a: str, node_b: str) -> Tuple[List[str], float]:
+        """Find shortest path using Dijkstra's algorithm"""
+        pass
 
     @abstractmethod
-    def is_cyclic(self): ...
+    def is_cyclic(self) -> bool:
+        """Check if the graph contains a cycle"""
+        pass
 
     @abstractmethod
-    def connected_component(self, node): ...
+    def connected_component(self, node: str) -> List[str]:
+        """Find all connected nodes starting from a given node"""
+        pass
 
     @abstractmethod
-    def get_neighbors(self, node): ...
+    def get_neighbors(self, node: str) -> List[Tuple[str, float]]:
+        """Get all neighbors of a node"""
+        pass
 
     @abstractmethod
-    def get_degree(self, node): ...
-
+    def get_degree(self, node: str) -> int:
+        """Get the degree of a node"""
+        pass
